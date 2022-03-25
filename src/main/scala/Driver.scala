@@ -1,3 +1,3 @@
-class Driver {
-
+object Driver{
+  def testing:String = "Looks good"
 }

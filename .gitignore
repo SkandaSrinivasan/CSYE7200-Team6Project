@@ -36,3 +36,5 @@ api/
 .idea
 .bsp/*
 /.bsp/
+
+*.csv

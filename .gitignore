@@ -37,4 +37,4 @@ api/
 .bsp/*
 /.bsp/
 
-*.csv
+/src/main/resources/*.csv

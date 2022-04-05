@@ -36,5 +36,5 @@ api/
 .idea
 .bsp/*
 /.bsp/
-
+/null
 /src/main/resources/*.csv

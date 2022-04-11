@@ -34,10 +34,11 @@ object Main extends App {
       "text",
       regexp_replace(
         $"text",
-        "@[A-Za-z0-9_]+|https?://[^ ]+",
+        "@[A-Za-z0-9_]+|https?://[^ ]+|www.[^ ]+|[^A-Z0-9_]",
         ""
       ) //Lets strip out all mentions(@) and remove all urls
     )
+
   m_df.show()
-  println(m_df.count())
+
 }

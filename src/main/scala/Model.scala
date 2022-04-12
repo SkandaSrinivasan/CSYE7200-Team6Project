@@ -1,4 +1,3 @@
-import Main.{cleaned_df, spark}
 import org.apache.spark.ml.PipelineModel
 import org.apache.spark.ml.classification.{
   LogisticRegression,
@@ -94,10 +93,16 @@ object Model extends App {
 
   val predictions: DataFrame = pipelineFit.transform(validationSet);
 
-  predictions.printSchema()
-//  val accuracy = predictions
-//    .filter(predictions("label") === predictions("prediction"))
-//    .count() / validationSet.count()
-//
-//  print(s"Accuracy score is: ${accuracy}")
+  val accurateCount = predictions
+    .filter(predictions("label") === predictions("prediction"))
+    .count()
+  val totalCount = validationSet.count();
+
+  print(s"Accuracy score is: ${(accurateCount / totalCount.toFloat) * 100} %")
+
+  pipelineFit.write
+    .overwrite()
+    .save(
+      "src/main/resources/model"
+    ) //Saving the trained and fitted model to use with primary dataset
 }

@@ -61,7 +61,11 @@ object Main extends App {
   ) //Remove the weird diamond qmark from non unicode chars and replace them with plain ol ?
 
   val completeDF =
-    utfCleanedTweet.na.drop(Seq("tweet")).filter(length($"tweet") > 1)
+    utfCleanedTweet.na
+      .drop(Seq("tweet"))
+      .filter(
+        length($"tweet") > 1
+      ) //Remove tweets that are empty after cleaning
 
   val myModel = PipelineModel.load("src/main/resources/model")
   val predictedData: DataFrame = myModel.transform(completeDF)
@@ -79,4 +83,5 @@ object Main extends App {
 
   postiveTweets.show()
   negativeTweets.show()
+
 }

@@ -28,44 +28,7 @@ object Main extends App {
     .drop(Seq("tweet"))
 
   //Start cleaning
-  import org.jsoup.Jsoup
-  val decodeHTML = (tweet: String) => {
-    Jsoup.parse(tweet).text()
-  }
-  val decodehtmlUDF = udf(decodeHTML) //UDF using jsoup
-
-  val decodedTweet: DataFrame =
-    start_df.withColumn(
-      "tweet",
-      decodehtmlUDF($"tweet")
-    ) // Parse all the html stuff like &amp &quot ,etc
-
-  val cleanTweet: DataFrame = {
-    decodedTweet.withColumn(
-      "tweet",
-      regexp_replace(
-        $"tweet",
-        "@[A-Za-z0-9_]+|https?://[^ ]+|www.[^ ]+",
-        ""
-      ) //Lets strip out all mentions(@) and remove all urls
-    )
-  }
-
-  val utfCleanedTweet = cleanTweet.withColumn(
-    "tweet",
-    regexp_replace(
-      $"tweet",
-      "\\ufffd",
-      "?"
-    )
-  ) //Remove the weird diamond qmark from non unicode chars and replace them with plain ol ?
-
-  val completeDF =
-    utfCleanedTweet.na
-      .drop(Seq("tweet"))
-      .filter(
-        length($"tweet") > 1
-      ) //Remove tweets that are empty after cleaning
+  val completeDF = Utils.clean(start_df);
 
   val myModel = PipelineModel.load("src/main/resources/model")
   val predictedData: DataFrame = myModel.transform(completeDF)

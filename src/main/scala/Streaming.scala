@@ -15,7 +15,7 @@ object Streaming extends App {
     .getOrCreate();
   import spark.implicits._;
   spark.sparkContext.setLogLevel("ERROR")
-  val ssc = new StreamingContext(spark.sparkContext, Seconds(60))
+  val ssc = new StreamingContext(spark.sparkContext, Seconds(10))
   val tweets: ReceiverInputDStream[Status] =
     TwitterUtils.createStream(ssc, None);
   //A stream of tweets
@@ -28,7 +28,8 @@ object Streaming extends App {
       .withColumnRenamed("value", "tweet")
       .withColumn("target", lit(0))
 
-    val predictedData: DataFrame = myModel.transform(tweetDF)
+    val cleanedDF = Utils.clean(tweetDF)
+    val predictedData: DataFrame = myModel.transform(cleanedDF)
     predictedData.show()
   })
   ssc.start()

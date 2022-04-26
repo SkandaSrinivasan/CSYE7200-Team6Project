@@ -5,7 +5,7 @@ import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 
 import scala.util.{Success, Try}
 
-class CISpec extends AnyFlatSpec with Matchers{
+class CISpec extends AnyFlatSpec with Matchers {
   val spark: SparkSession = SparkSession
     .builder()
     .appName("Spark Assignment6")
@@ -15,13 +15,6 @@ class CISpec extends AnyFlatSpec with Matchers{
   behavior of "Driver.testing"
   it should "should return hello" in {
     Driver.testing mustEqual "Looks good";
-  }
-
-  it should "show success when creating spark session" in {
-
-    Try(spark) should matchPattern {
-      case Success(s:SparkSession) =>
-    }
   }
 
 }

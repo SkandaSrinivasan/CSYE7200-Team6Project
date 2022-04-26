@@ -20,15 +20,17 @@ libraryDependencies += "org.apache.spark" %% "spark-mllib" % "3.1.3"
 
 libraryDependencies += "org.jsoup" % "jsoup" % "1.14.3"
 
-libraryDependencies += "io.spray" %%  "spray-json" % "1.3.6"
+libraryDependencies += "io.spray" %% "spray-json" % "1.3.6"
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.11" % "test"
+
+libraryDependencies += "org.mongodb.scala" %% "mongo-scala-driver" % "4.6.0"
 
 val Http4sVersion = "1.0.0-M21"
 val CirceVersion = "0.14.0-M5"
 libraryDependencies ++= Seq(
-  "org.http4s"      %% "http4s-blaze-server" % Http4sVersion,
-  "org.http4s"      %% "http4s-circe"        % Http4sVersion,
-  "org.http4s"      %% "http4s-dsl"          % Http4sVersion,
-  "io.circe"        %% "circe-generic"       % CirceVersion,
+  "org.http4s" %% "http4s-blaze-server" % Http4sVersion,
+  "org.http4s" %% "http4s-circe" % Http4sVersion,
+  "org.http4s" %% "http4s-dsl" % Http4sVersion,
+  "io.circe" %% "circe-generic" % CirceVersion
 )

@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.CountVectorizerModel","timestamp":1649718044135,"sparkVersion":"3.2.1","uid":"cntVec_90073a989651","paramMap":{"inputCol":"words","outputCol":"cv"},"defaultParamMap":{"maxDF":9.223372036854776E18,"outputCol":"cntVec_90073a989651__output","binary":false,"vocabSize":262144,"minTF":1.0,"minDF":1.0}}

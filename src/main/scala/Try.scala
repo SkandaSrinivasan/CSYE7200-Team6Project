@@ -1,5 +1,3 @@
-import Streaming.ssc
-import com.google.gson.Gson
 import org.apache.spark.ml.PipelineModel
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.functions.lit

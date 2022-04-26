@@ -26,8 +26,10 @@ object Model extends App {
   val formatted_df: DataFrame = trainingDf
     .withColumnRenamed("_c0", "target")
     .withColumnRenamed("_c5", "tweet")
+    .withColumn("origTweet", $"tweet")
     .drop("_c1", "_c2", "_c3", "_c4")
 
+  formatted_df.show()
   import org.jsoup.Jsoup
   val decodeHTML = (tweet: String) => {
     Jsoup.parse(tweet).text()

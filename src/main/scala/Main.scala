@@ -37,14 +37,19 @@ object Main extends App {
     .filter(predictedData("prediction") =!= 1.0)
     .select($"tweet", $"prediction");
 
-  val postiveTweets = predictedData
+  val positiveTweets = predictedData
     .filter(predictedData("prediction") === 1.0)
     .select($"tweet", $"prediction");
 
-  println(postiveTweets.count())
-  println(negativeTweets.count())
+  val positiveCount: Long = positiveTweets.count();
+  val negativeCount: Long = negativeTweets.count();
 
-  postiveTweets.show()
-  negativeTweets.show()
+  val totalTweets = positiveTweets.count() + negativeTweets.count();
+
+  println(s"Positive Tweets = ${(positiveCount / totalTweets.toFloat) * 100}%")
+  println(s"Negative Tweet  = ${(negativeCount / totalTweets.toFloat) * 100}%")
+
+//  positiveTweets.show()
+//  negativeTweets.show()
 
 }

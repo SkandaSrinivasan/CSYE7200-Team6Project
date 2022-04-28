@@ -13,27 +13,29 @@ import typings.reactPlotlyJs.components.ReactPlotlyDotjs
 import scala.scalajs.js
 
 object Main {
-  var jsonData = "Hello World"
+  var oneSize = -1
+  var zeroSize = -1
   val Component = FunctionalComponent[Unit] {
     case () =>
-      println(jsonData)
       val data = js.Array[Data](
         PartialPlotDataAutobinx()
-          .setXVarargs(1, 2, 3)
-          .setYVarargs(2, 6, 3)
-          .setType(PlotType.scatter)
-          .setMode(plotlyJsStrings.linesPlussignmarkers)
-          .setMarker(
-            PartialPlotMarkerAutocolorscale()
-              .setColor("red")
-          ),
-        PartialPlotDataAutobinx()
           .setType(PlotType.bar)
-          .setXVarargs(1, 2, 3)
-          .setYVarargs(2, 5, 3)
+          .setXVarargs(0, 1)
+          .setYVarargs(64, 31)
       )
 
       ReactPlotlyDotjs(data = data, layout = PartialLayout().setWidth(500).setHeight(500).setTitle("A Fancy Plot")).debug(true)
+  }
+
+  def processData(requestData: String): Unit = {
+    val patZero = "0.0".r
+    val patOnes = "1.0".r
+    val zeroUnfiltered = patZero.findAllMatchIn(requestData).map(_.toString.trim).toArray
+    val oneUnfiltered = patOnes.findAllMatchIn(requestData).map(_.toString.trim).toArray
+    val zero = zeroUnfiltered.filter(_ != "000")
+    val one = oneUnfiltered.filter(_ != "100")
+    oneSize = one.size
+    zeroSize = zero.size
   }
 
   def getData(): Unit = {
@@ -42,7 +44,8 @@ object Main {
       xhr.onload = { (e: dom.Event) =>
         if (xhr.status == 200) {
           val r = js.JSON.parse(xhr.responseText)
-          jsonData = js.JSON.stringify(r)
+          val requestData = js.JSON.stringify(r)
+          processData(requestData)
         }
       }
       xhr.send()

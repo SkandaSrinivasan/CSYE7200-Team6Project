@@ -15,16 +15,16 @@ import scala.scalajs.js
 object Main {
   var oneSize = -1
   var zeroSize = -1
-  val Component = FunctionalComponent[Unit] {
+  var Component = FunctionalComponent[Unit] {
     case () =>
-      val data = js.Array[Data](
+      var data = js.Array[Data](
         PartialPlotDataAutobinx()
           .setType(PlotType.bar)
           .setXVarargs(0, 1)
-          .setYVarargs(64, 31)
+          .setYVarargs(zeroSize, oneSize)
       )
 
-      ReactPlotlyDotjs(data = data, layout = PartialLayout().setWidth(500).setHeight(500).setTitle("A Fancy Plot")).debug(true)
+      ReactPlotlyDotjs(data = data, layout = PartialLayout().setWidth(500).setHeight(500).setTitle("Sentiment Data")).debug(true)
   }
 
   def processData(requestData: String): Unit = {
@@ -46,6 +46,8 @@ object Main {
           val r = js.JSON.parse(xhr.responseText)
           val requestData = js.JSON.stringify(r)
           processData(requestData)
+          println("Zerosize" + zeroSize)
+          println("Onesize" + oneSize)
         }
       }
       xhr.send()

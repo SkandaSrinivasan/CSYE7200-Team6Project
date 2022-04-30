@@ -21,7 +21,7 @@ import org.mongodb.scala.model.Updates._
 import org.mongodb.scala.model.UpdateOptions
 import org.mongodb.scala.bson.BsonObjectId
 import Helpers._;
-object Try extends App {
+object Streaming extends App {
   import org.mongodb.scala._
   val spark: SparkSession = SparkSession
     .builder()

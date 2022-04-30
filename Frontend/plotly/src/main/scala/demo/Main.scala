@@ -20,8 +20,8 @@ object Main {
       var data = js.Array[Data](
         PartialPlotDataAutobinx()
           .setType(PlotType.bar)
-          .setXVarargs(0, 1)
-          .setYVarargs(zeroSize, oneSize)
+          .setXVarargs(63, 38)
+          .setYVarargs(10, 20, 30, 40 ,50)
       )
 
       ReactPlotlyDotjs(data = data, layout = PartialLayout().setWidth(500).setHeight(500).setTitle("Sentiment Data")).debug(true)
@@ -47,7 +47,7 @@ object Main {
           val requestData = js.JSON.stringify(r)
           processData(requestData)
           println("Zerosize" + zeroSize)
-          println("Onesize" + oneSize)
+          println("Onesize")
         }
       }
       xhr.send()

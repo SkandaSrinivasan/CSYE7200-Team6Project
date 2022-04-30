@@ -3,7 +3,6 @@ import java.nio.file.StandardCopyOption.REPLACE_EXISTING
 
 import scala.sys.process.Process
 
-
 lazy val start = TaskKey[Unit]("start")
 
 lazy val dist = TaskKey[File]("dist")
@@ -30,7 +29,6 @@ lazy val hotReloadingSettings: Project => Project =
       )
     )
 
-
 lazy val plotly = project
   .enablePlugins(ScalablyTypedConverterPlugin)
   .configure(baseSettings, browserProject, reactNpmDeps, bundlerSettings)
@@ -41,10 +39,9 @@ lazy val plotly = project
     Compile / npmDependencies ++= Seq(
       "plotly.js" -> "1.57.1",
       "react-plotly.js" -> "2.5.0",
-      "@types/react-plotly.js" -> "2.2.4",
-    ),
+      "@types/react-plotly.js" -> "2.2.4"
+    )
   )
-
 
 lazy val reactNpmDeps: Project => Project =
   _.settings(
@@ -67,7 +64,9 @@ lazy val bundlerSettings: Project => Project =
 
 lazy val withCssLoading: Project => Project =
   _.settings(
-    webpackConfigFile := Some((ThisBuild / baseDirectory).value / "custom.webpack.config.js"),
+    webpackConfigFile := Some(
+      (ThisBuild / baseDirectory).value / "custom.webpack.config.js"
+    ),
     Compile / npmDevDependencies ++= Seq(
       "webpack-merge" -> "4.2.2",
       "css-loader" -> "3.4.2",
@@ -85,7 +84,8 @@ lazy val browserProject: Project => Project =
     dist := {
       val artifacts = (Compile / fullOptJS / webpack).value
       val artifactFolder = (Compile / fullOptJS / crossTarget).value
-      val distFolder = (ThisBuild / baseDirectory).value / "docs" / moduleName.value
+      val distFolder =
+        (ThisBuild / baseDirectory).value / "docs" / moduleName.value
 
       distFolder.mkdirs()
       artifacts.foreach { artifact =>

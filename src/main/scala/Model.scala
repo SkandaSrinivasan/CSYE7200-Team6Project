@@ -1,11 +1,5 @@
 import org.apache.spark.ml.PipelineModel
-import org.apache.spark.ml.classification.{
-  GBTClassifier,
-  LinearSVC,
-  LogisticRegression,
-  LogisticRegressionModel,
-  RandomForestClassifier
-}
+import org.apache.spark.ml.classification.{GBTClassifier, LinearSVC, LogisticRegression, LogisticRegressionModel, RandomForestClassifier}
 import org.apache.spark.ml.feature.CountVectorizer
 import org.apache.spark.sql.functions.{length, regexp_replace, udf}
 import org.apache.spark.sql.{DataFrame, Dataset, Row, SparkSession}
@@ -35,6 +29,7 @@ object Model extends App {
     .withColumn("origTweet", $"tweet")
     .drop("_c1", "_c2", "_c3", "_c4")
 
+  formatted_df.show()
   import org.jsoup.Jsoup
   val decodeHTML = (tweet: String) => {
     Jsoup.parse(tweet).text()

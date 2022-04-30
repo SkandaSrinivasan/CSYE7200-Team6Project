@@ -16,7 +16,7 @@ class TweetRepository @Inject() (implicit
   def collection: Future[BSONCollection] =
     reactiveMongoApi.database.map(db => db.collection("tweets"))
 
-  def findAll(limit: Int = 100): Future[Seq[Tweet]] = {
+  def findAll(limit: Int = 10000): Future[Seq[Tweet]] = {
     collection.flatMap(
       _.find(BSONDocument(), Option.empty[Tweet])
         .cursor[Tweet](ReadPreference.Primary)

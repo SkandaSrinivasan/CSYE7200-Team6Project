@@ -19,17 +19,4 @@ Shot
 Vax
 Covid vaccine
 #VACCINE
-#pfizer
-#Covid19
-#Covid-19
-#Coronavirus
-#StayHomeStaySafe
-#StayHome
-#QuarantineandChill
-#LockdownNow
-#Covidiots
-#MyPandemicSurvivalPlan
-#FlattenTheCurve
-#SocialDistancing
-#TogetherAtHome
-#BigOnlinePar
+#Pfizer
